@@ -47,13 +47,13 @@
             text-shadow: 0 0 15px var(--pink-glow);
         }
 
-        /* --- GRID DOS PROJETOS --- */
+        /* --- GRID DOS PROJETOS (Ajustado para caber mais itens ao lado) --- */
         main {
-            max-width: 900px;
+            max-width: 1100px;
             width: 100%;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Imagens menores e lado a lado */
+            gap: 1.5rem;
             justify-content: center;
         }
 
@@ -62,7 +62,7 @@
             background-color: var(--card-bg);
             border: 1px solid rgba(255, 209, 220, 0.2);
             border-radius: 16px;
-            padding: 1.5rem;
+            padding: 1.2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -78,11 +78,15 @@
         }
 
         main h3 {
-            font-size: 1.1rem;
+            font-size: 0.95rem; /* Ajustado proporcionalmente */
             color: var(--pink-baby);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             font-weight: 500;
             letter-spacing: 0.5px;
+            min-height: 2.4rem; /* Alinha os títulos mesmo se tiverem tamanhos diferentes */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* --- IMAGENS E LINKS --- */
@@ -117,7 +121,7 @@
 </head>
 <body>
     <header>
-        <h1>Portifólio de Lau</h1>
+        <h1>Portfólio de Lau</h1>
     </header>
     
     <main>
@@ -139,14 +143,17 @@
             <a href="./turismo.html">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6ZjwpoPyc7xrnfz6v28uV-Wed1LycLrp0P9cMD7enXReWsskv9Y-0cg&s=10" alt="turismo_russia">
             </a>
-
-
-
+        </div>
+        <div>
+            <h3>My little pony</h3>
+            <a href="./mlp.html">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaTwHuZ4QPvJncu6VsjlkCrK0M73xpfOp7ttiRz8TeOg&s=10" alt="mlp">
+            </a>
         </div>
     </main>
 
     <footer>
-        <p>Todos os direitos reservados!! &copy; 2026</p>
+        <p>Todos os direitos reservados!! &copy; lau2026</p>
     </footer>
 </body>
 </html>
