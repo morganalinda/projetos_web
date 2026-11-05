@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculador de Desconto</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f7dce5;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .container {
+            background-color: #fff8fa;
+            width: 300px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            border: 2px solid #eab7c9;
+        }
+
+        h1 {
+            color: #171217;
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .subtitulo {
+            color: #9b667c;
+            text-align: center;
+            font-size: 11px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: #171217;
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 13px;
+            border: 1px solid #e5b3c5;
+            border-radius: 8px;
+            background-color: white;
+            font-size: 12px;
+        }
+
+        input:focus {
+            outline: 2px solid #d98eaa;
+        }
+
+        button {
+            padding: 9px;
+            border: none;
+            border-radius: 8px;
+            background-color: #171217;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 9px;
+        }
+
+        button:hover {
+            background-color: #d98eaa;
+            color: #171217;
+        }
+
+        .limpar {
+            background-color: #edc5d3;
+            color: #171217;
+        }
+
+        .limpar:hover {
+            background-color: #171217;
+            color: white;
+        }
+
+        .resultado {
+            background-color: #f7dce5;
+            padding: 13px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border-left: 4px solid #171217;
+        }
+
+        .resultado h3 {
+            color: #171217;
+            margin-bottom: 12px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .resultado p {
+            color: #33242c;
+            font-size: 12px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Calculadora de Desconto</h1>
+
+        <p class="subtitulo">
+            Descubra quanto você vai economizar!
+        </p>
+
+        <form onsubmit="calcular(event)">
+
+            Produto:
+            <input type="text" id="produto" required>
+
+            Valor:
+            <input type="number" id="valor" step="0.01" required>
+
+            Desconto:
+            <input type="number" step="5" id="desconto" required>
+
+            <button type="submit">Calcular</button>
+
+            <button type="reset" class="limpar">Limpar</button>
+
+        </form>
+
+        <br>
+
+        <div class="resultado">
+
+            <h3>Resultado</h3>
+
+            <p id="resultado1"></p>
+            <p id="resultado2"></p>
+            <p id="resultado3"></p>
+            <p id="resultado4"></p>
+
+        </div>
+
+    </div>
+
+    <script>
+        function calcular(event) {
+
+            event.preventDefault();
+
+            let produto = document.getElementById("produto").value;
+            let valor = Number(document.getElementById("valor").value);
+            let desconto = Number(document.getElementById("desconto").value);
+
+            let valor_desconto = valor * (desconto / 100);
+            let valor_final = valor - valor_desconto;
+
+            document.getElementById("resultado1").innerHTML =
+                '<b>Produto:</b> ' + produto;
+
+            document.getElementById("resultado2").textContent =
+                'Valor: R$ ' + valor.toFixed(2);
+
+            document.getElementById("resultado3").textContent =
+                'Desconto: R$ ' + valor_desconto.toFixed(2);
+
+            document.getElementById("resultado4").textContent =
+                'Valor Final: R$ ' + valor_final.toFixed(2);
+
+        }
+    </script>
+
+</body>
+</html>
