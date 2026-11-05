@@ -6,357 +6,531 @@
     <meta name="Keywords" content="Turismo, Russia, Moscou, Pelmeni">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Russia</title>
-    <link rel="icon" type="image/x-icon"
-        href="https://img.icons8.com/?size=100&id=n9U8ipe42Fep&format=png&color=000000">
-    <link rel="stylesheet" href="./css/estilo.css">
+    <title>Descubra a Rússia | Guia de Turismo</title>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=n9U8ipe42Fep&format=png&color=0284c7">
+    
     <style>
+        /* --- RESET E VARIÁVEIS (CORES CLARAS E MODERNAS) --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
 
+        :root {
+            --bg-body: #f8fafc;          /* Fundo suave cinza/azul bem claro */
+            --card-bg: #ffffff;          /* Branco puro para os cards */
+            --primary-blue: #0284c7;     /* Azul turismo vibrante */
+            --primary-hover: #0369a1;    /* Azul escuro para efeitos */
+            --soft-sky: #e0f2fe;         /* Azul celeste super claro */
+            --text-main: #1e293b;        /* Grafite escuro para leitura confortável */
+            --text-muted: #64748b;       /* Cinza médio para textos secundários */
+            --border-light: #e2e8f0;     /* Bordas sutis */
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* --- HERO BANNER LUMINOSO --- */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            min-height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            border-bottom: 4px solid var(--primary-blue);
+        }
+
+        .hero-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.55);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 20px;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            color: #ffffff;
+            letter-spacing: 2px;
+            font-weight: 800;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: var(--soft-sky);
+            font-size: 1.25rem;
+            font-weight: 400;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- MENU DE NAVEGAÇÃO FIXO --- */
+        .cartao-a {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            padding: 12px 0;
+        }
+
+        #menu ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            list-style: none;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        #menu a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        #menu a:hover {
+            color: var(--primary-blue);
+            background-color: var(--soft-sky);
+        }
+
+        /* --- CONTAINER PRINCIPAL --- */
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--soft-sky), transparent);
+        }
+
+        /* --- CARDS MODERNOS EM BRANCO --- */
+        .cartao-turismo, .cartao-cidades, .cartao-cultura, .cartao-musica {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(148, 163, 184, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cartao-turismo:hover, .cartao-cidades:hover, .cartao-cultura:hover, .cartao-musica:hover {
+            box-shadow: 0 14px 30px rgba(2, 132, 199, 0.12);
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        /* --- GALERIAS DE IMAGENS ALINHADAS --- */
+        .grid-imagens {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .grid-imagens img, .cartao-famosos img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .grid-imagens img:hover, .cartao-famosos img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(2, 132, 199, 0.2);
+        }
+
+        /* --- TABELA MODERNA --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--soft-sky);
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+
+        td {
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* --- GASTRONOMIA --- */
+        .comida-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .comida-item {
+            background-color: var(--bg-body);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        .comida-item img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .comida-item figcaption {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .comida-item figcaption strong {
+            color: var(--primary-blue);
+            display: block;
+            font-size: 1.05rem;
+            margin-bottom: 4px;
+        }
+
+        /* --- FAMOSOS --- */
+        .famosas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .famosas {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .texto-famosas ul {
+            list-style: none;
+        }
+
+        .texto-famosas li {
+            margin-bottom: 15px;
+            padding-left: 14px;
+            border-left: 3px solid var(--primary-blue);
+            color: var(--text-muted);
+        }
+
+        .texto-famosas b {
+            color: var(--text-main);
+        }
+
+        .cartao-famosos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        /* --- BOTÕES DE AÇÃO --- */
+        .acoes-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 50px 0 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-acao {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+        }
+
+        .btn-acao:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.4);
+        }
+
+        /* --- RODAPÉ --- */
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 30px 0;
+            border-top: 1px solid var(--border-light);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 
-<body bgcolor="#A4B4BD">
+<body>
 
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvUDWL5rKsB0_F3cDGp_7KQ25x5DXT4dR3-aIrdf7zwzlV6FMoozgYRqI6&s=10"
-        alt="russia" width="1225" height="350">
-    <header style="color: white;">
-        <h1 style="color: white; font-size: 80px;"><b><ins>Conheça a Russia !!</ins></b></h1>
-    </header>
-    <hr style="border-color: white;">
-    <div class="cartao-a">
-    <nav id="menu">
-        <ul id="lista_menu" class=>
-            <a href="#principais_pontos"> Principais pontos turisticos!</a>
-            <a href="#cidades_turisticas"> Cidades Turisticas!</a>
-            <a href="#comidas_tipicas"> Comidas tipicas!</a>
-            <a href="#figuras_famosas"> Figuras Famosas na Russia!</a>
-            <a href="#cultura_tradiçoes"> Cultura e tradições!</a>
-            <a href="#musica_id"> Genero Musicais!</a>
-        </ul>
-    </nav>
+    <!-- HERO BANNER -->
+    <div class="hero">
+        <img class="hero-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvUDWL5rKsB0_F3cDGp_7KQ25x5DXT4dR3-aIrdf7zwzlV6FMoozgYRqI6&s=10" alt="Rússia Banner">
+        <div class="hero-content">
+            <h1>Conheça a Rússia</h1>
+            <p>Sua próxima jornada inesquecível pelo maior país do mundo</p>
+        </div>
     </div>
+
+    <!-- MENU DE NAVEGAÇÃO FIXO -->
+    <div class="cartao-a">
+        <nav id="menu">
+            <ul id="lista_menu">
+                <li><a href="#principais_pontos">Pontos Turísticos</a></li>
+                <li><a href="#cidades_turisticas">Cidades</a></li>
+                <li><a href="#comidas_tipicas">Gastronomia</a></li>
+                <li><a href="#figuras_famosas">Personalidades</a></li>
+                <li><a href="#cultura_tradiçoes">Cultura</a></li>
+                <li><a href="#musica_id">Música</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <main>
-
-
-
-        <hr style="border-color: white;">
+        <!-- SOBRE & HISTÓRIA -->
         <section id="historia_russia">
             <div class="cartao-turismo">
-                <h1 style="color: white;"> <ins>Visite e reserve!</ins></h1>
-                <p id="historiarussia" style="color: white;"><i>
-                        Bem vindo a russia! A Rússia é um país fascinante cheio de dimensões impressionantes, conhecido
-                        por sua história milenar,
-                        <br>diversidade cultural e paisagens naturais extraordinárias. Localizada entre a Europa e a
-                        Ásia, ela reúne
-                        cidades modernas, vilarejos históricos, florestas gigantescas, montanhas, lagos <br> e regiões
-                        cobertas de neve.
-                        Cada parte do território apresenta características próprias, tornando o país um destino cheio de
-                        descobertas.
-                        Sua capital, Moscou, mistura construções históricas com arranha-céus, grandes avenidas <br> e
-                        uma vida urbana
-                        movimentada. Já São Petersburgo encanta os visitantes com seus palácios, canais, museus e
-                        arquitetura
-                        inspirada em diferentes estilos europeus.
-                        A Rússia também é famosa por suas tradições artísticas. O balé, a literatura, a música clássica
-                        e o
-                        artesanato fazem parte de sua identidade cultural. <br>Escritores como Fiódor Dostoiévski e Liev
-                        Tolstói
-                        produziram obras que se tornaram conhecidas mundialmente, enquanto compositores como Tchaikovsky
-                        marcaram a
-                        história da música.
-                        A natureza é outro grande destaque. O Lago Baikal, na Sibéria, é considerado o lago de água doce
-                        mais
-                        profundo do mundo e abriga espécies encontradas apenas naquela região. Na Península de
-                        Kamchatka, vulcões,
-                        gêiseres e fontes termais formam paisagens impressionantes. O país também possui extensas
-                        florestas boreais,
-                        conhecidas como taiga, que abrigam animais como ursos, lobos e alces.</i></p>
+                <h2>Visite e Reserve!</h2>
+                <p id="historiarussia">
+                    Bem-vindo à Rússia! Um país fascinante cheio de dimensões impressionantes, conhecido por sua história milenar, diversidade cultural e paisagens naturais extraordinárias. Localizada entre a Europa e a Ásia, reúne cidades modernas, vilarejos históricos, florestas gigantescas, montanhas, lagos e regiões cobertas de neve.
+                </p>
+                <p>
+                    Sua capital, Moscou, mistura construções históricas com arranha-céus e uma vida urbana movimentada. Já São Petersburgo encanta os visitantes com seus palácios, canais, museus e arquitetura inspirada em diferentes estilos europeus.
+                </p>
             </div>
-            <hr style="border-color: white;">
+
+            <br>
+
             <div class="cartao-turismo">
-                <h2 id=historia_russia style="color: white;"><b><ins>História da Russia:</ins></b></h2>
-                <p style="color: white;"><i>Império Russo: a partir de 1721, a Rússia passou oficialmente a ser um
-                        império. Durante
-                        esse período, o país ampliou seu território e construiu palácios, cidades e instituições
-                        importantes. São
-                        Petersburgo tornou-se uma capital imperial e um grande centro cultural.
-                        Revolução Russa de 1917: a monarquia foi derrubada em meio a crises sociais, econômicas e
-                        políticas. Os
-                        bolcheviques assumiram o poder e iniciaram a formação de um novo sistema político.
-                        União Soviética: criada em 1922, a União das Repúblicas Socialistas Soviéticas (URSS) tornou-se
-                        uma das
-                        principais potências mundiais do século XX. Teve papel decisivo na Segunda Guerra Mundial e
-                        protagonizou a
-                        corrida espacial, enviando o primeiro ser humano ao espaço em 1961.
-                        Rússia contemporânea: em 1991, a União Soviética foi dissolvida e a Federação Russa passou a
-                        existir como
-                        Estado independente. Desde então, o país atravessa transformações políticas, econômicas e
-                        sociais e continua
-                        exercendo influência nas relações internacionais.
-                        A história russa pode ser observada em seus monumentos, igrejas, fortalezas, museus e memoriais.
-                        Por isso,
-                        conhecer esses lugares é também uma maneira de compreender os acontecimentos que moldaram a
-                        identidade do
-                        país.</i></p>
+                <h2>História da Rússia</h2>
+                <p><strong>Império Russo:</strong> A partir de 1721, a Rússia tornou-se um império e São Petersburgo transformou-se em uma capital imperial e centro cultural.</p>
+                <p><strong>Revolução Russa de 1917:</strong> A monarquia foi derrubada e iniciou-se a formação de um novo sistema político.</p>
+                <p><strong>União Soviética:</strong> Criada em 1922, a URSS destacou-se na Segunda Guerra Mundial e protagonizou a corrida espacial enviando o primeiro ser humano ao espaço em 1961.</p>
+                <p><strong>Rússia Contemporânea:</strong> Em 1991, passou a existir como Federação Russa independente, mantendo sua enorme influência mundial.</p>
             </div>
         </section>
+
+        <!-- PONTOS TURÍSTICOS -->
         <section id="secao_pontos">
-            <hr style="border-color: rgb(255, 255, 255);">
-            <h2 id="principais_pontos" style="color: white;"><b><ins>Principais pontos turisticos:</ins></b></h2>
+            <h2>Principais Pontos Turísticos</h2>
             <div class="cartao-turismo">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLu-9HlT6SKkEkKQZI_i3VTcYpKfaQfO3_wCudbjvHrFXlDp-YTiHNl6Y&s=10"
-                    alt="praça vermelha" width="240" height="190" class="praça">
-                <img src="https://s2.glbimg.com/zAH6Cj6gBkJ5K3WqTghLwlpMeuU=/e.glbimg.com/og/ed/f/original/2017/10/09/1-sptb-215-web56.jpg"
-                    alt="museu hermitage" width="240" height="190" class="museu">
-                <img src="https://assojuris.org.br/wp-content/uploads/2023/10/Sem-titulo.png" alt="Lago Baikal"
-                    width="240" height="190" class="lago">
-
-                <img src="https://cdni.rbth.com/rbthmedia/images/web/it-rbth/images/2016-08/big/meraviglie_zar_peterhof.jpg"
-                    alt="Palacio Peterhof" width="240" height="190" class="palacio">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpkkueUJol34szp9oFabsorMOFYxu89P6ECg_aCl8QHQ&s=10"
-                    alt="" width="240px" height="190px" class="">
+                <div class="grid-imagens">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLu-9HlT6SKkEkKQZI_i3VTcYpKfaQfO3_wCudbjvHrFXlDp-YTiHNl6Y&s=10" alt="Praça Vermelha">
+                    <img src="https://s2.glbimg.com/zAH6Cj6gBkJ5K3WqTghLwlpMeuU=/e.glbimg.com/og/ed/f/original/2017/10/09/1-sptb-215-web56.jpg" alt="Museu Hermitage">
+                    <img src="https://assojuris.org.br/wp-content/uploads/2023/10/Sem-titulo.png" alt="Lago Baikal">
+                    <img src="https://cdni.rbth.com/rbthmedia/images/web/it-rbth/images/2016-08/big/meraviglie_zar_peterhof.jpg" alt="Palácio Peterhof">
+                </div>
             </div>
-
         </section>
+
+        <!-- TABELA -->
         <section id="secao_turisticos">
-            <table border="lpx" style="color: white; font-size: 17px;" align="left">
-                <tr>
-                    <th style="color: white;" colspan="4">Russia</th>
-                </tr>
-                <tr bgcolor="white">
-                    <div>
-                        <th style="color: lightblue;">Pontos Turisticos</th>
-                        <th style="color: lightblue;">Localidade</th>
-                        <th style="color: lightblue;">Valor de acesso</th>
-                        <th style="color: lightblue;">Horarios</th>
-                    </div>
-                </tr>
-                <tr>
-                    <div>
-                        <td style="color: white;">Praça Vermelha</td>
-                        <td style="color: white;">Moscou</td>
-                        <td style="color: white;">Gratuito</td>
-                        <td style="color: white;">Toda hora</td>
-                    </div>
-                </tr>
-                <tr>
-                    <div>
-                        <td style="color: white;">Museu Hermitage</td>
-                        <td style="color: white;">São Petersburgo</td>
-                        <td style="color: white;">700/1200 rublos</td>
-                        <td style="color: white">11:00 as 20:00</td>
-                    </div>
-                </tr>
-                <tr style="color: white;">
-                    <div>
-                        <td style="color: white;">Lago Baikal</td>
-                        <td style="color: white;">Sibéria</td>
-                        <td style="color: white;">Gratuito</td>
-                        <td style="color: white;">Toda hora</td>
-                    </div>
-                </tr>
-                <tr>
-                    <div>
-                        <td style="color: white;">Palacio De Peterhof</td>
-                        <td style="color: white;">São Petersburgo</td>
-                        <td style="color: white;">Variado</td>
-                        <td style="color: white;">09:00 as 20:00</td>
-                    </div>
-                </tr>
-                <tr>
-                    <div>
-                        <td style="color: white;">Teatro Bolshoi</td>
-                        <td style="color: white;">Moscou</td>
-                        <td style="color: white;">Pago</td>
-                        <td style="color: white;">11:00 as 20:00</td>
-                    </div>
-                </tr>
-        </section>
-        <section>
+            <h2>Tabela de Destinos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pontos Turísticos</th>
+                        <th>Localidade</th>
+                        <th>Valor de Acesso</th>
+                        <th>Horários</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Praça Vermelha</td>
+                        <td>Moscou</td>
+                        <td>Gratuito</td>
+                        <td>Toda hora</td>
+                    </tr>
+                    <tr>
+                        <td>Museu Hermitage</td>
+                        <td>São Petersburgo</td>
+                        <td>700/1200 rublos</td>
+                        <td>11:00 às 20:00</td>
+                    </tr>
+                    <tr>
+                        <td>Lago Baikal</td>
+                        <td>Sibéria</td>
+                        <td>Gratuito</td>
+                        <td>Toda hora</td>
+                    </tr>
+                    <tr>
+                        <td>Palácio De Peterhof</td>
+                        <td>São Petersburgo</td>
+                        <td>Variado</td>
+                        <td>09:00 às 20:00</td>
+                    </tr>
+                    <tr>
+                        <td>Teatro Bolshoi</td>
+                        <td>Moscou</td>
+                        <td>Pago</td>
+                        <td>11:00 às 20:00</td>
+                    </tr>
+                </tbody>
             </table>
-            <br><br><br><br><br><br><br><br><br><br><br>
-            <hr style="border-color: white;">
-            <div class="cartao-cidades">
-                <h2 id="cidades_turisticas" style="color: white;"><b><ins>Cidades Turisticas:</ins></b></h2>
-                <ul>
-                    <li style="color: white;">Moscou - é a capital, a maior cidade e o principal centro político,
-                        econômico e
-                        cultural da Rússia</li>
-                    <li style="color: white;">São Petersburgo - é a segunda maior cidade da Rússia, amplamente
-                        reconhecida como o
-                        coração cultural do país e frequentemente apelidada de a "Veneza do Norte" devido aos seus
-                        impressionantes
-                        canais e rios </li>
-                    <li style="color: white;">Cazã - é a capital e a maior cidade da República do Tartaristão, na Rússia
-                    </li>
-                </ul>
-            </div>
-            <div class="cartao-cidades">
-                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/Moscow-City_%2836211143494%29_%28crop%29.jpg/250px-Moscow-City_%2836211143494%29_%28crop%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail"
-                    alt="Moscou" width="260" height="220" class="Moscou">
-                <img src="https://media.digitalnomads.world/wp-content/uploads/2021/07/20115759/saint-petersburg-digital-nomads.jpg"
-                    alt="" width="260" height="220" class="saopetersburgo">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoPPDv1aOSNlFapA1-ZhJ_cjnK5QU9Q0sT8z8Ay29-nGSpOPXczVp8yStg&s=10"
-                    alt="" width="260" height="220" class="caza">
-            </div>
-            <hr style="border-color: white;">
         </section>
+
+        <!-- CIDADES -->
+        <section id="secao_cidades">
+            <h2>Cidades Turísticas</h2>
+            <div class="cartao-cidades">
+                <p><strong>Moscou:</strong> Capital, maior cidade e principal centro político e cultural da Rússia.</p>
+                <p><strong>São Petersburgo:</strong> Coração cultural apelidado de a "Veneza do Norte" por seus canais.</p>
+                <p><strong>Cazã:</strong> Encantadora capital da República do Tartaristão.</p>
+                
+                <div class="grid-imagens">
+                    <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/Moscow-City_%2836211143494%29_%28crop%29.jpg/250px-Moscow-City_%2836211143494%29_%28crop%29.jpg" alt="Moscou">
+                    <img src="https://media.digitalnomads.world/wp-content/uploads/2021/07/20115759/saint-petersburg-digital-nomads.jpg" alt="São Petersburgo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoPPDv1aOSNlFapA1-ZhJ_cjnK5QU9Q0sT8z8Ay29-nGSpOPXczVp8yStg&s=10" alt="Cazã">
+                </div>
+            </div>
+        </section>
+
+        <!-- GASTRONOMIA -->
         <section id="secao_comidas">
+            <h2>Comidas Típicas</h2>
             <div class="cartao-turismo">
-                <h2 id="comidas_tipicas" style="color: white;"><b><ins>Comidas Tipicas:</ins></b></h2>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYAjFaLvY0GowCsDoaCZFZM9t3dSg8fOgurDPw0fNNrq_uXUO9ZV5ojSo&s=10"
-                    alt="" width="240" height="210">
-                <figcaption style="color: white;"><br><i>Pelmeni -
-                        Pequenos pastéis de massa recheados com carne moída, geralmente cozidos em água e servidos com
-                        manteiga ou
-                        creme azedo (smetana).
-                        <br>são parecidos com raviólis.</i></figcaption>
-                <br><br>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHIRvhMqDFD5mpOtohGQUbhD6BLOfBj6FZ6kCkrtsOJcQBBNufI5tvD00&s=10"
-                    alt="" width="240" height="210">
-                <br>
-                <br>
-                <figcaption style="color: white;"><i>Strogonoff russo (Beef Stroganoff) -
-                        Carne bovina em tiras com molho cremoso, frequentemente preparado com creme azedo e mostarda.
-                        <br> A versão tradicional é diferente da brasileira, que costuma levar ketchup, creme de leite e
-                        batata
-                        palha.</i></figcaption>
-                <br>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Honey_cake_Medovik.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
-                    alt="" width="240" height="210">
-                <br>
-                <br>
-                <figcaption style="color: white;"><i>Medovik -
-                        Bolo tradicional de mel com várias camadas finas de massa e creme.
-                        <br> É uma das sobremesas mais conhecidas da Rússia.</i></figcaption>
-                <br>
-                <img src="https://www.babaganosh.org/wp-content/uploads/2015/06/syrniki-recipe-russian-cheese-pancakes-2.jpg"
-                    alt="" width="240" height="210">
-                <br>
-                <br>
-                <figcaption style="color: white;"><i>Syrniki -
-                        Pequenas panquecas feitas com queijo fresco tipo tvorog, semelhantes a bolinhos de queijo doces.
-                        <br> Costumam ser servidas no café da manhã com creme azedo, frutas ou geleia.</i></figcaption>
+                <div class="comida-grid">
+                    <div class="comida-item">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYAjFaLvY0GowCsDoaCZFZM9t3dSg8fOgurDPw0fNNrq_uXUO9ZV5ojSo&s=10" alt="Pelmeni">
+                        <figcaption><strong>Pelmeni</strong> Pastéis de carne servidos com manteiga ou creme azedo (smetana).</figcaption>
+                    </div>
+
+                    <div class="comida-item">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHIRvhMqDFD5mpOtohGQUbhD6BLOfBj6FZ6kCkrtsOJcQBBNufI5tvD00&s=10" alt="Strogonoff">
+                        <figcaption><strong>Strogonoff Russo</strong> Carne bovina com molho cremoso tradicional à base de smetana e mostarda.</figcaption>
+                    </div>
+
+                    <div class="comida-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Honey_cake_Medovik.jpg" alt="Medovik">
+                        <figcaption><strong>Medovik</strong> Bolo tradicional de mel feito com várias camadas finas e creme suave.</figcaption>
+                    </div>
+
+                    <div class="comida-item">
+                        <img src="https://www.babaganosh.org/wp-content/uploads/2015/06/syrniki-recipe-russian-cheese-pancakes-2.jpg" alt="Syrniki">
+                        <figcaption><strong>Syrniki</strong> Panquecas doces de queijo tvorog perfeitas para o café da manhã.</figcaption>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <!-- FAMOSOS -->
         <section id="secao_famosos">
-            <hr style="border-color: white;">
-            <h2 class="h2" style="color: white;"><b><ins>Figuras Famosas na Russia:</ins></b></h2>
-
-            <div class="famosas">
-
-    <div class="texto-famosas">
-        <ul>
-            <li>
-                <b>Alexandra Trusova:</b>
-                Conhecida pelos saltos quádruplos extremamente
-                difíceis e pela medalha de prata olímpica em 2022.
-            </li>
-
-            <li>
-                <b>IC3PEAK:</b>
-                Duo russo de música eletrônica experimental,
-                conhecido pela estética sombria.
-            </li>
-
-            <li>
-                <b>MIA BOYKA:</b>
-                Cantora popular entre o público jovem,
-                conhecida por músicas pop.
-            </li>
-
-            <li>
-                <b>Irina Shayk:</b>
-                Modelo internacional nascida na Rússia,
-                famosa por campanhas de moda.
-            </li>
-        </ul>
-    </div>
-
-    <div class="cartao-famosos">
-
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxRRc9E_-yjREHrTInQnn0IohYAEH0mdZC9BSf36VhdhGaxi5b7abpvnlo&s=10"
-                    alt="" width="170" height="190" class="img1">
-                <img src="https://i.scdn.co/image/ab6761610000517488b9cf4b179ce084b90cccc9" alt="" width="170"
-                    height="190" class="img2">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHtnWq36S-H61F4fzxYFsOL9vguEtXMIshE5ZaW9QEm8eXy5GavyRRIMQ&s=10"
-                    alt="" width="170" height="190" class="img3">
-                <img src="https://s2-quem.glbimg.com/0-07gW6SoCUk31bbNbzzaeNgg_U=/0x0:764x764/fit-in/822x764/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_b0f0e84207c948ab8b8777be5a6a4395/internal_photos/bs/2022/V/S/vlOSEdRcaJN7sAy97cSg/2020-03-04-irina-shayk.jpeg"
-                    alt="" width="170" height="190" class="img4">
-
-    </div>
-
-</div>
-            
-        </section>
-        <hr style="border-color: white;">
-        <div class="cartao-cultura">
-        <section id="secao_culturas">
-            <h2 id="cultura_tradiçoes" style="color: white;"><b><ins>Cultura e tradições:</ins></b></h2>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbWIOws722nrYB1Dymugd4zB-Jj0bF1jZ_qc4O5J0JkjYm9s_CqWDPZqw&s=10"
-                alt="" width="240px" height="190px">
-            <br>
-            <p class="Maslenitsa" style="color: white;"><i>Maslenitsa: É uma festa tradicional que marca a despedida do
-                    inverno e a chegada da primavera. As pessoas comem blinis, semelhantes a panquecas,
-                    <br> participam de brincadeiras e de celebrações populares.
-                </i></p>
-            <br>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1FcPyWHlbZ4RbwoRwaQgJxz5S3znfltaNjtHGg7alf-7JEKgyi7eTAbqd&s=10"
-                alt="" width="240" height="190px">
-            <p style="color: white ;"><i>Matrioskas: São bonecas de madeira pintadas, encaixadas e umas dentro das
-                    outras.
-                    <br> Tornaram-se um dos simbolos mais conhecidos do artesanato russo e são lembranças populares
-                    entre turitas.
-                </i></p>
-            <img src="https://harpersbazaaruk.cdnds.net/17/29/4000x3000/gallery-1500559949-banya-5.jpg" alt=""
-                width="240px" height="190px">
-            <p style="color: white;"><i>banya é a tradicional sauna a vapor russa, aquecida por um fogão a lenha com
-                    pedras quentes.
-                    <br> Diferente das saunas comuns, ela envolve rituais intensos de calor, uso de feixes de ramos de
-                    árvores para massagem (venik) e mergulhos em água gelada.</i></p>
+            <h2>Figuras Famosas na Rússia</h2>
+            <div class="cartao-turismo">
+                <div class="famosas">
+                    <div class="texto-famosas">
+                        <ul>
+                            <li><b>Alexandra Trusova:</b> Conhecida pelos saltos quádruplos e medalha de prata olímpica.</li>
+                            <li><b>IC3PEAK:</b> Duo de música eletrônica experimental e estética marcante.</li>
+                            <li><b>MIA BOYKA:</b> Cantora popular entre o público jovem.</li>
+                            <li><b>Irina Shayk:</b> Modelo internacional famosa mundialmente.</li>
+                        </ul>
+                    </div>
+                    <div class="cartao-famosos">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxRRc9E_-yjREHrTInQnn0IohYAEH0mdZC9BSf36VhdhGaxi5b7abpvnlo&s=10" alt="Trusova">
+                        <img src="https://i.scdn.co/image/ab6761610000517488b9cf4b179ce084b90cccc9" alt="IC3PEAK">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHtnWq36S-H61F4fzxYFsOL9vguEtXMIshE5ZaW9QEm8eXy5GavyRRIMQ&s=10" alt="MIA BOYKA">
+                        <img src="https://s2-quem.glbimg.com/0-07gW6SoCUk31bbNbzzaeNgg_U=/0x0:764x764/fit-in/822x764/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_b0f0e84207c948ab8b8777be5a6a4395/internal_photos/bs/2022/V/S/vlOSEdRcaJN7sAy97cSg/2020-03-04-irina-shayk.jpeg" alt="Irina Shayk">
+                    </div>
+                </div>
             </div>
-            <hr style="border-color: white;">
-            <div class="cartao-musica">
-            <h2 style="color: white;">Genero musicais mais conhecidos:</h2>
-            <p style="color: white;"><i>A russia possui uma grande diversidade de musicas, que mistura
-                        <br> tradições antigas com ritmos modernos. Entre os generos mais conhecidos estão a musica
-                        <br>clássica, o rock, o pop e a música eletronica.
-                        <br>Cada estilo represeta um pouco da história, da cultura e do modo de vida da população
-                        <br>russa, tornando a música uma parte importante da identidade do país !
-                    </i></p>
-
-            <hr style="border-color: white;">
-            
-            <section id="secao_musica">
-            <p style="color: white;"><i><b>Música clássica:</b>
-                    a rússia é mundialmente famosa por seus compositores, como Tchaikovsky e Rachmaninoff
-                    <br> além de suas grandes orquestras, óperas e apresentações de balé !</i>
-            <p style="color: white;"><i><b>Metal russo:</b>
-                    <br>ganhou muita popularidade durante o século XX, com bandas e artistas que abordavam temas como
-                    liberdade
-                    <br> sociedade e sentimentos pessoais./i></p>
-            <p style="color: white;"><i><b>Pop russo:</b>
-                    <br>muito presente nas rádios e plataformas digitais, mistura melodias modernas
-                    <br> ritmos dançantes e influências internacionais com a língua russa.</i></p>
-            </i></p>
-            <p id="musica_id" style="color: white;"><i><b>Música eletrônica (EDM e techno):</b>
-                    <br>presente nas festas e nos clubes de grandes cidades como Moscou e São Petersburgo
-                    <br> com estilos que vão do house ao techno pesado.</i></p>
         </section>
+
+        <!-- CULTURA E MÚSICA -->
+        <section id="secao_cultura_musica">
+            <h2>Cultura & Gêneros Musicais</h2>
+            <div class="cartao-cultura">
+                <p><strong>Maslenitsa:</strong> Festa tradicional de despedida do inverno com deliciosos blinis!</p>
+                <p><strong>Matrioskas:</strong> Bonecas de madeira encaixadas umas dentro das outras, símbolo do artesanato russo.</p>
+                <p><strong>Banya:</strong> Tradicional sauna a vapor aquecida a lenha com pedras quentes.</p>
+                <br>
+                <p id="musica_id"><strong>Diversidade Musical:</strong> Vai da música clássica (Tchaikovsky) ao Rock, Pop e ritmos modernos de eletrônica nas grandes cidades.</p>
             </div>
+        </section>
 
-
-
-        <hr style="border-color: white;">
-        <a href="./html/Reserva.html">Reserve !!!</a>
-        <br>
-        <a href="./html/Form.html">Fale com a gente !!</a>
-        <hr style="border-color: white;">
-        <br>
+        <!-- BOTÕES DE RESERVA/CONTATO -->
+        <div class="acoes-container">
+            <a href="./Reserva.html" class="btn-acao">Reserve Agora</a>
+            <a href="./Form.html" class="btn-acao">Fale com a gente</a>
+        </div>
     </main>
-    <footer>
-        <p> Todos os direitos reservados. &copy;lau2026</p>
-    </footer>
-</body>
 
+    <footer>
+        <p>Todos os direitos reservados &copy; lau 2026</p>
+    </footer>
+
+</body>
 </html>
